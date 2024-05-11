@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TextThatTalk Simple Chat App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="page.css" />
+    <style>
+      #blocker,
+      #ask-name {
+        /* display: none; */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="blocker"></div>
+    <div id="ask-name">
+      <h2>Welcome to my chat app</h2>
+        <div>
+          <input type="text" placeholder="Name" autofocus id="name-box" />
+          <label for="color">Color:</label>
+          <input type="color" name="color" id="color" />
+        </div>
+        <div>
+          <input placeholder="Password (not your real password)" id="pass-box" type="password" />
+          <button id="chat-button">Chat!</button>
+        </div>
+    </div>
+    <div id="communication">
+      <div id="chats">
+        <div class="chat internal">
+          <div class="chat-text-box">
+            <div class="chat-sender">goal</div>
+            <div class="chat-text">sadfdnsakasdfffklnfalskd</div>
+          </div>
+        </div>
+        <div class="chat external">
+          <div class="chat-text-box">
+            <div class="chat-sender">someonr</div>
+            <div class="chat-text">sadfdnsakasdfffklnfalskd</div>
+          </div>
+        </div>
+      </div>
+      <form id="prompt">
+        <textarea type="text" id="data" name="data"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+    <script>
+      const webSocket = new WebSocket("ws://localhost:443/");
+      let name;
+      webSocket.onmessage = (event) => {
+        console.log(event);
+        // document.getElementById("messages").innerHTML +=
+        //   "Message from server: " + event.data + "<br>";
+      };
+      webSocket.addEventListener("open", () => {
+        console.log("We are connected");
+      });
+      function sendMessage(message) {
+        webSocket.send(message);
+      }
+      function sendIt() {
+        webSocket.send(document.querySelector("textarea"));
+      }
+    </script>
+  </body>
+</html>

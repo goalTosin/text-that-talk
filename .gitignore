@@ -1,4 +1,3 @@
 # this is a simple comment
 
-node-modules
-node-modules/**
+node_modules/
